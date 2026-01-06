@@ -96,4 +96,4 @@ pip install -r requirements.txt
 
 ## 参考
 
-本程序基于ExamIns-main的C项目开发，保持了原有的功能和逻辑结构。
+本程序基于 dc236621911的C项目<a href="https://github.com/dc236621911/ExamIns">ExamIns</a>开发，保持了原有的功能和逻辑结构。
