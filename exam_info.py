@@ -158,6 +158,19 @@ class ExamInfo(QDialog):
             self.sound_data = ins_data.get_sound()
             self.logger.info(f"加载了 {len(self.sound_data)} 条考试指令")
             
+            # 外语科目时使用p5w.mp3
+            if (self.exam_type == "gk" and self.index == 3) or (self.exam_type == "pt" and self.index == 3):  # index 3 对应外语科目
+                for i, sound in enumerate(self.sound_data):
+                    if sound.play_file == "p5.mp3":
+                        self.sound_data[i] = Sound(
+                            play_time=sound.play_time,
+                            play_ins=sound.play_ins,
+                            play_file="p5w.mp3",
+                            is_before_exam=sound.is_before_exam
+                        )
+                        self.logger.info(f"外语科目：将指令 {i} 的音频文件从 {sound.play_file} 改为 p5w.mp3")
+                        break
+            
             self.play_time_list = []
             for sound in self.sound_data:
                 if sound.is_before_exam:
