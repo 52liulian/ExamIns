@@ -1,9 +1,9 @@
 import sys
 import os
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QRadioButton, QPushButton, QCheckBox
+from PyQt5.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QRadioButton, QPushButton, QCheckBox, QDesktopWidget
 from PyQt5.QtGui import QFont, QIcon
 
-from settings import settings_manager
+from settings import settings_manager, VERSION
 
 
 class MainDialog(QDialog):
@@ -15,8 +15,14 @@ class MainDialog(QDialog):
         self.init_ui()
 
     def init_ui(self):
-        self.setWindowTitle("考试指令播放系统")
-        self.setFixedSize(380, 200)
+        self.setWindowTitle(f"考试指令播放系统 v{VERSION}")
+        self.setFixedSize(450, 250)
+        
+        # 屏幕居中显示
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
         
         layout = QVBoxLayout()
         
@@ -51,6 +57,8 @@ class MainDialog(QDialog):
         button_layout = QHBoxLayout()
         self.start_btn = QPushButton("进入考试")
         self.start_btn.setFont(QFont("微软雅黑", 12))
+        self.start_btn.setMinimumWidth(120)
+        self.start_btn.setMinimumHeight(40)
         self.start_btn.clicked.connect(self.on_start_exam)
         button_layout.addStretch()
         button_layout.addWidget(self.start_btn)

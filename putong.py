@@ -78,10 +78,17 @@ class PutongDialog(QDialog):
         layout.addSpacing(30)
         
         button_layout = QHBoxLayout()
+        self.back_btn = QPushButton("返回")
+        self.back_btn.setFont(QFont("微软雅黑", 12))
+        self.back_btn.setMinimumHeight(40)
+        self.back_btn.clicked.connect(self.on_back)
         self.ok_btn = QPushButton("确定")
         self.ok_btn.setFont(QFont("微软雅黑", 12))
+        self.ok_btn.setMinimumHeight(40)
         self.ok_btn.clicked.connect(self.on_ok)
         button_layout.addStretch()
+        button_layout.addWidget(self.back_btn)
+        button_layout.addSpacing(20)
         button_layout.addWidget(self.ok_btn)
         button_layout.addStretch()
         
@@ -164,3 +171,9 @@ class PutongDialog(QDialog):
         ))
         exam_info.init()
         exam_info.exec_()
+    
+    def on_back(self):
+        self.close()
+        from dialog import MainDialog
+        main_dialog = MainDialog()
+        main_dialog.exec_()

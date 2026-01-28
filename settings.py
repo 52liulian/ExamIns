@@ -2,6 +2,10 @@ import os
 import json
 import logging
 
+# 版本号定义
+VERSION = "1.0.0"
+
+
 class SettingsManager:
     def __init__(self):
         # 配置文件保存到config文件夹

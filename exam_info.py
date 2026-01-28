@@ -2,7 +2,7 @@ import sys
 import os
 import logging
 from datetime import datetime, timedelta
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QMessageBox
+from PyQt5.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, QMessageBox, QScrollArea
 from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtGui import QFont, QIcon
 
@@ -44,7 +44,14 @@ class ExamInfo(QDialog):
 
     def init_ui(self):
         self.setWindowTitle("考试信息")
-        self.setFixedSize(600, 400)
+        
+        # 获取屏幕大小并设置窗口最大大小
+        from PyQt5.QtWidgets import QApplication
+        screen = QApplication.desktop().availableGeometry()
+        max_width = int(screen.width() * 0.9)
+        max_height = int(screen.height() * 0.9)
+        self.setMaximumSize(max_width, max_height)
+        self.resize(min(600, max_width), min(500, max_height))
         
         layout = QVBoxLayout()
         
@@ -76,17 +83,33 @@ class ExamInfo(QDialog):
         self.ins_label.setFont(QFont("微软雅黑", 11))
         ins_layout.addWidget(self.ins_label)
         
+        # 为指令内容添加滚动条
         content_layout = QVBoxLayout()
         content_layout.addWidget(QLabel("指令内容:"))
+        
+        # 创建滚动区域
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        
+        # 创建内容标签并设置为滚动区域的 widget
         self.ins_content_label = QLabel()
         self.ins_content_label.setWordWrap(True)
         self.ins_content_label.setFont(QFont("微软雅黑", 10))
-        content_layout.addWidget(self.ins_content_label)
+        scroll_area.setWidget(self.ins_content_label)
+        
+        # 设置滚动区域的最小高度
+        scroll_area.setMinimumHeight(150)
+        
+        content_layout.addWidget(scroll_area)
         
         button_layout = QHBoxLayout()
         self.ins_list_btn = QPushButton("查看指令列表")
+        self.ins_list_btn.setFont(QFont("微软雅黑", 12))
+        self.ins_list_btn.setMinimumHeight(40)
         self.ins_list_btn.clicked.connect(self.show_ins_list)
         self.stop_btn = QPushButton("停止")
+        self.stop_btn.setFont(QFont("微软雅黑", 12))
+        self.stop_btn.setMinimumHeight(40)
         self.stop_btn.clicked.connect(self.stop_exam)
         button_layout.addWidget(self.ins_list_btn)
         button_layout.addWidget(self.stop_btn)
