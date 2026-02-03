@@ -52,13 +52,11 @@ def main():
     icon_path = os.path.join(os.path.dirname(__file__), "icon.ico")
     if os.path.exists(icon_path):
         app.setWindowIcon(QIcon(icon_path))
-        logger.info(f"加载图标成功: {icon_path}")
     else:
         logger.warning(f"图标文件不存在: {icon_path}")
     
     font = QFont("微软雅黑", 10)
     app.setFont(font)
-    logger.info("设置应用字体为微软雅黑 10")
     
     try:
         main_dialog = MainDialog()
