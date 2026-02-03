@@ -20,7 +20,7 @@ class PutongDialog(QDialog):
 
     def init_ui(self):
         self.setWindowTitle("普通模式")
-        self.setFixedSize(450, 300)
+        self.setFixedSize(450, 350)
         
         layout = QVBoxLayout()
         
@@ -93,6 +93,9 @@ class PutongDialog(QDialog):
         button_layout.addStretch()
         
         layout.addLayout(button_layout)
+        
+        # 增加按钮距离底部的距离
+        layout.addSpacing(20)
         
         self.setLayout(layout)
         

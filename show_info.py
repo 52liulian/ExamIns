@@ -53,6 +53,9 @@ class ShowInfo(QDialog):
         
         layout.addLayout(button_layout)
         
+        # 增加按钮距离底部的距离
+        layout.addSpacing(20)
+        
         self.setLayout(layout)
 
     def set_data(self, sound_data, start_time, end_time):

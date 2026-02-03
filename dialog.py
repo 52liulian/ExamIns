@@ -28,12 +28,14 @@ class MainDialog(QDialog):
         
         layout.addSpacing(60)
         
+        # 单选按钮布局（水平居中）
         radio_layout = QHBoxLayout()
+        radio_layout.addStretch()
         self.gaokao_radio = QRadioButton("高考模式")
         self.gaokao_radio.setFont(QFont("微软雅黑", 12))
         self.gaokao_radio.setChecked(True)
         radio_layout.addWidget(self.gaokao_radio)
-        radio_layout.addStretch()
+        radio_layout.addSpacing(40)  # 两个单选按钮之间的间距
         self.putong_radio = QRadioButton("普通模式")
         self.putong_radio.setFont(QFont("微软雅黑", 12))
         radio_layout.addWidget(self.putong_radio)
@@ -42,8 +44,9 @@ class MainDialog(QDialog):
         
         layout.addSpacing(20)
         
-        # 添加自动网络校时设置
+        # 添加自动网络校时设置（水平居中）
         ntp_layout = QHBoxLayout()
+        ntp_layout.addStretch()
         self.ntp_checkbox = QCheckBox("启动时自动网络校时")
         self.ntp_checkbox.setFont(QFont("微软雅黑", 10))
         self.ntp_checkbox.setChecked(settings_manager.get_auto_ntp_sync())
@@ -54,17 +57,21 @@ class MainDialog(QDialog):
         
         layout.addSpacing(40)
         
+        # 按钮布局（水平居中）
         button_layout = QHBoxLayout()
+        button_layout.addStretch()
         self.start_btn = QPushButton("进入考试")
         self.start_btn.setFont(QFont("微软雅黑", 12))
         self.start_btn.setMinimumWidth(120)
         self.start_btn.setMinimumHeight(40)
         self.start_btn.clicked.connect(self.on_start_exam)
-        button_layout.addStretch()
         button_layout.addWidget(self.start_btn)
         button_layout.addStretch()
         
         layout.addLayout(button_layout)
+        
+        # 增加按钮距离底部的距离
+        layout.addSpacing(20)
         
         self.setLayout(layout)
 

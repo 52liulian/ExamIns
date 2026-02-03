@@ -28,3 +28,7 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+
+# nuitka构建文件
+dist_nuitka/
+build_nuitka.py
