@@ -20,7 +20,7 @@ class PutongDialog(QDialog):
 
     def init_ui(self):
         self.setWindowTitle("普通模式")
-        self.setFixedSize(450, 350)
+        self.setFixedSize(300, 300)
         
         layout = QVBoxLayout()
         

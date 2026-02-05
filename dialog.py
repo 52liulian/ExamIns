@@ -16,7 +16,7 @@ class MainDialog(QDialog):
 
     def init_ui(self):
         self.setWindowTitle(f"考试指令播放系统 v{VERSION}")
-        self.setFixedSize(450, 250)
+        self.setFixedSize(300, 150)
         
         # 屏幕居中显示
         qr = self.frameGeometry()

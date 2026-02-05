@@ -17,7 +17,7 @@ class GaokaoDialog(QDialog):
 
     def init_ui(self):
         self.setWindowTitle("高考模式")
-        self.setFixedSize(450, 300)
+        self.setFixedSize(300, 200)
         
         layout = QVBoxLayout()
         
