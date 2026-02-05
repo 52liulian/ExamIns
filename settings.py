@@ -3,7 +3,7 @@ import json
 import logging
 
 # 版本号定义
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 
 
 class SettingsManager:
