@@ -6,11 +6,16 @@ dist_nuitka/
 __pycache__/
 *.spec
 
+# nuitka构建文件
+dist_nuitka/
+build_nuitka.py
+
 # 日志文件
 logs/
 
-#配置文件
+# 配置文件
 config/
+
 # 临时文件
 *.swp
 *.swo
@@ -29,6 +34,19 @@ Thumbs.db
 *.sln
 *.sw?
 
-# nuitka构建文件
-dist_nuitka/
-build_nuitka.py
+# Python环境
+*.egg-info/
+.eggs/
+.pip/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 虚拟环境
+venv/
+env/
+*.env
+
+# 运行时数据
+*.log
+*.pid
