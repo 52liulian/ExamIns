@@ -1,0 +1,34 @@
+# 构建文件
+dist/
+build/
+dist_nuitka/
+*.pyc
+__pycache__/
+*.spec
+
+# 日志文件
+logs/
+
+#配置文件
+config/
+# 临时文件
+*.swp
+*.swo
+*.tmp
+
+# 操作系统文件
+Thumbs.db
+.DS_Store
+
+# IDE文件
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# nuitka构建文件
+dist_nuitka/
+build_nuitka.py
