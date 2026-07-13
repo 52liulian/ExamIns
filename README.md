@@ -122,6 +122,9 @@ ExamIns/
 
 - [说明文档.md](说明文档.md) - 项目规划、进度记录、问题跟踪
 - [开发规范.md](开发规范.md) - 代码规范、Git规范、开发流程
+- [AGENTS.md](AGENTS.md) - AI智能体定义和协作流程
+- [DESIGN.md](DESIGN.md) - 系统架构设计和技术决策
+- [CLAUDE.md](CLAUDE.md) - AI辅助开发标准化指令
 
 ## 注意事项
 
