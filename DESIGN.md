@@ -262,9 +262,81 @@ class Sound:
 
 ### 5.3 扩展性设计
 
-| 扩展点 | 设计考虑 |
-|------|---------|
-| 新增考试模式 | 通过继承ExamInfo类实现 |
-| 新增指令 | 在SoundData中添加新的Sound对象 |
-| 新增音频格式 | 在AudioPlayer中扩展格式支持 |
-| 多语言支持 | 将指令内容提取为配置文件 |
+| 扩展点 | 设计考虑 | 实现方式 |
+|------|---------|---------|
+| 新增考试模式 | 通过继承ExamInfo类实现 | 创建新的子类，重写`init()`和时间配置方法 |
+| 新增指令 | 在SoundData中添加新的Sound对象 | 在`_set_gaokao_sound()`或`_set_putong_sound()`中添加 |
+| 新增音频格式 | 在AudioPlayer中扩展格式支持 | 添加格式检测和对应的播放器逻辑 |
+| 多语言支持 | 将指令内容提取为配置文件 | 创建多语言资源文件，根据系统语言加载 |
+| 考试科目管理 | 将科目配置外部化 | 创建`subjects.json`配置文件，支持动态加载 |
+| 指令自定义 | 将指令数据外部化存储 | 创建`instructions.json`配置文件，支持CRUD操作 |
+| 考试日程安排 | 设计日程数据模型 | 创建日程管理模块，支持导入/导出 |
+| 远程控制 | 添加网络通信模块 | 使用WebSocket实现客户端-服务器通信 |
+
+### 5.4 扩展数据模型
+
+#### 考试科目模型（规划中）
+
+```python
+@dataclass
+class Subject:
+    id: str              # 科目唯一标识
+    name: str            # 科目名称
+    duration: int        # 考试时长（分钟）
+    default_start_time: str  # 默认开始时间
+    default_end_time: str    # 默认结束时间
+    exam_type: str       # 适用考试类型（gk/pt/all）
+```
+
+#### 考试日程模型（规划中）
+
+```python
+@dataclass
+class ExamSchedule:
+    id: str              # 日程唯一标识
+    date: str            # 考试日期
+    subjects: List[SubjectSchedule]  # 当天科目安排
+    
+@dataclass
+class SubjectSchedule:
+    subject_id: str      # 科目ID
+    start_time: str      # 开始时间
+    end_time: str        # 结束时间
+    room_number: str     # 考场号（可选）
+```
+
+### 5.5 扩展配置文件
+
+#### subjects.json（规划中）
+
+```json
+{
+    "subjects": [
+        {
+            "id": "chinese",
+            "name": "语文",
+            "duration": 150,
+            "default_start_time": "09:00:00",
+            "default_end_time": "11:30:00",
+            "exam_type": "all"
+        }
+    ]
+}
+```
+
+#### instructions.json（规划中）
+
+```json
+{
+    "instructions": [
+        {
+            "id": "p1",
+            "play_time": 50,
+            "content": "开始：（短促的轻\"嘟\"音后开始）轻音乐……",
+            "audio_file": "p1.mp3",
+            "is_before_exam": true,
+            "exam_type": "gk"
+        }
+    ]
+}
+```

@@ -9,7 +9,18 @@ from exam_info import ExamInfo
 
 
 class PutongDialog(QDialog):
+    """普通模式选择对话框
+    
+    提供普通模式下的考试科目选择和时间自定义界面，
+    包含13个科目选项和开始/结束时间选择器。
+    """
+    
     def __init__(self, parent=None):
+        """初始化普通模式对话框
+        
+        Args:
+            parent: 父窗口对象
+        """
         super().__init__(parent)
         icon_path = os.path.join(os.path.dirname(__file__), "icon.ico")
         if os.path.exists(icon_path):
@@ -19,6 +30,10 @@ class PutongDialog(QDialog):
         self.init_ui()
 
     def init_ui(self):
+        """初始化用户界面
+        
+        创建对话框布局，包含标题、科目选择下拉框、时间选择器和确认/返回按钮。
+        """
         self.setWindowTitle("普通模式")
         self.setFixedSize(300, 300)
         
@@ -29,7 +44,7 @@ class PutongDialog(QDialog):
         title_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(title_label)
         
-        layout.addSpacing(30) #  添加30像素的间距
+        layout.addSpacing(30)
         
         combo_layout = QHBoxLayout()
         combo_layout.addWidget(QLabel("请选择考试科目："))
@@ -94,7 +109,6 @@ class PutongDialog(QDialog):
         
         layout.addLayout(button_layout)
         
-        # 增加按钮距离底部的距离
         layout.addSpacing(20)
         
         self.setLayout(layout)
@@ -102,47 +116,61 @@ class PutongDialog(QDialog):
         self.on_combo_changed(0)
 
     def on_combo_changed(self, index):
-        if index == 0:  # 语文
+        """处理科目选择变化事件
+        
+        根据选择的科目设置默认的开始和结束时间。
+        
+        Args:
+            index: 科目索引
+        """
+        if index == 0:
             self.start_time_edit.setTime(QTime(9, 0, 0))
             self.end_time_edit.setTime(QTime(11, 30, 0))
-        elif index == 1:  # 数学
+        elif index == 1:
             self.start_time_edit.setTime(QTime(14, 30, 0))
             self.end_time_edit.setTime(QTime(16, 30, 0))
-        elif index == 2:  # 历史
+        elif index == 2:
             self.start_time_edit.setTime(QTime(16, 50, 0))
             self.end_time_edit.setTime(QTime(18, 5, 0))
-        elif index == 3:  # 外语
+        elif index == 3:
             self.start_time_edit.setTime(QTime(8, 0, 0))
             self.end_time_edit.setTime(QTime(10, 0, 0))
-        elif index == 4:  # 化学
+        elif index == 4:
             self.start_time_edit.setTime(QTime(10, 20, 0))
             self.end_time_edit.setTime(QTime(11, 35, 0))
-        elif index == 5:  # 物理
+        elif index == 5:
             self.start_time_edit.setTime(QTime(14, 30, 0))
             self.end_time_edit.setTime(QTime(15, 45, 0))
-        elif index == 6:  # 生物
+        elif index == 6:
             self.start_time_edit.setTime(QTime(16, 5, 0))
             self.end_time_edit.setTime(QTime(17, 20, 0))
-        elif index == 7:  # 政治
+        elif index == 7:
             self.start_time_edit.setTime(QTime(8, 0, 0))
             self.end_time_edit.setTime(QTime(9, 15, 0))
-        elif index == 8:  # 地理
+        elif index == 8:
             self.start_time_edit.setTime(QTime(9, 35, 0))
             self.end_time_edit.setTime(QTime(10, 50, 0))
-        elif index == 9:  # 物理/历史
+        elif index == 9:
             self.start_time_edit.setTime(QTime(10, 30, 0))
             self.end_time_edit.setTime(QTime(11, 45, 0))
-        elif index == 10:  # 化学/政治
+        elif index == 10:
             self.start_time_edit.setTime(QTime(14, 30, 0))
             self.end_time_edit.setTime(QTime(15, 45, 0))
-        elif index == 11:  # 生物/地理
+        elif index == 11:
             self.start_time_edit.setTime(QTime(15, 55, 0))
             self.end_time_edit.setTime(QTime(17, 10, 0))
-        elif index == 12:  # 其他
+        elif index == 12:
             self.start_time_edit.setTime(QTime(0, 0, 0))
             self.end_time_edit.setTime(QTime(0, 0, 0))
 
     def on_ok(self):
+        """处理确定按钮点击事件
+        
+        验证时间配置，创建考试信息界面并显示。
+        
+        Returns:
+            None
+        """
         index = self.combo_box.currentIndex()
         kemu = self.combo_box.currentText()
         
@@ -176,6 +204,13 @@ class PutongDialog(QDialog):
         exam_info.exec_()
     
     def on_back(self):
+        """处理返回按钮点击事件
+        
+        返回主选择界面。
+        
+        Returns:
+            None
+        """
         self.close()
         from dialog import MainDialog
         main_dialog = MainDialog()

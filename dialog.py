@@ -7,7 +7,18 @@ from settings import settings_manager, VERSION
 
 
 class MainDialog(QDialog):
+    """主选择对话框
+    
+    提供考试模式选择界面，包含高考模式和普通模式两个选项，
+    以及网络校时设置复选框。
+    """
+    
     def __init__(self, parent=None):
+        """初始化主对话框
+        
+        Args:
+            parent: 父窗口对象
+        """
         super().__init__(parent)
         icon_path = os.path.join(os.path.dirname(__file__), "icon.ico")
         if os.path.exists(icon_path):
@@ -15,10 +26,13 @@ class MainDialog(QDialog):
         self.init_ui()
 
     def init_ui(self):
+        """初始化用户界面
+        
+        创建对话框布局，包含模式选择单选按钮、网络校时复选框和进入考试按钮。
+        """
         self.setWindowTitle(f"考试指令播放系统 v{VERSION}")
         self.setFixedSize(300, 150)
         
-        # 屏幕居中显示
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
@@ -28,14 +42,13 @@ class MainDialog(QDialog):
         
         layout.addSpacing(60)
         
-        # 单选按钮布局（水平居中）
         radio_layout = QHBoxLayout()
         radio_layout.addStretch()
         self.gaokao_radio = QRadioButton("高考模式")
         self.gaokao_radio.setFont(QFont("微软雅黑", 12))
         self.gaokao_radio.setChecked(True)
         radio_layout.addWidget(self.gaokao_radio)
-        radio_layout.addSpacing(40)  # 两个单选按钮之间的间距
+        radio_layout.addSpacing(40)
         self.putong_radio = QRadioButton("普通模式")
         self.putong_radio.setFont(QFont("微软雅黑", 12))
         radio_layout.addWidget(self.putong_radio)
@@ -44,7 +57,6 @@ class MainDialog(QDialog):
         
         layout.addSpacing(20)
         
-        # 添加自动网络校时设置（水平居中）
         ntp_layout = QHBoxLayout()
         ntp_layout.addStretch()
         self.ntp_checkbox = QCheckBox("启动时自动网络校时")
@@ -57,7 +69,6 @@ class MainDialog(QDialog):
         
         layout.addSpacing(40)
         
-        # 按钮布局（水平居中）
         button_layout = QHBoxLayout()
         button_layout.addStretch()
         self.start_btn = QPushButton("进入考试")
@@ -70,17 +81,24 @@ class MainDialog(QDialog):
         
         layout.addLayout(button_layout)
         
-        # 增加按钮距离底部的距离
         layout.addSpacing(20)
         
         self.setLayout(layout)
 
     def on_ntp_checkbox_changed(self, state):
-        """处理自动网络校时复选框状态变化"""
-        auto_sync = state == 2  # Qt.Checked
+        """处理自动网络校时复选框状态变化
+        
+        Args:
+            state: 复选框状态，2表示选中，0表示未选中
+        """
+        auto_sync = state == 2
         settings_manager.set_auto_ntp_sync(auto_sync)
     
     def on_start_exam(self):
+        """处理进入考试按钮点击事件
+        
+        根据用户选择的模式，打开对应的模式选择界面。
+        """
         self.close()
         
         if self.gaokao_radio.isChecked():

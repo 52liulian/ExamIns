@@ -9,17 +9,19 @@ from dialog import MainDialog
 from settings import settings_manager
 from ntp_sync import ntp_sync
 
-# 配置日志
+
 def setup_logging():
-    # 创建logs文件夹
+    """配置日志系统
+    
+    创建logs目录并配置日志格式，日志同时输出到文件和控制台。
+    日志文件名格式为 YYYY-MM-DD.log。
+    """
     log_dir = os.path.join(os.path.dirname(__file__), "logs")
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
     
-    # 日志文件名格式：YYYY-MM-DD.log
     log_file = os.path.join(log_dir, f"{datetime.now().strftime('%Y-%m-%d')}.log")
     
-    # 配置日志
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -31,12 +33,19 @@ def setup_logging():
 
 
 def main():
-    # 初始化日志
+    """主程序入口函数
+    
+    执行流程：
+    1. 初始化日志系统
+    2. 根据配置执行自动网络校时
+    3. 创建Qt应用实例
+    4. 设置应用图标和字体
+    5. 显示主对话框并启动事件循环
+    """
     setup_logging()
     logger = logging.getLogger(__name__)
     logger.info("考试指令播放系统启动")
     
-    # 检查并执行网络校时
     if settings_manager.get_auto_ntp_sync():
         logger.info("开始自动网络校时")
         success = ntp_sync.sync_system_time()
