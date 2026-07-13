@@ -87,7 +87,7 @@ pip install -r requirements.txt
 ## 文件结构
 
 ```text
-考试语音指令播放器/
+ExamIns/
 ├── main.py              # 主程序入口
 ├── dialog.py            # 主选择界面
 ├── gaokao.py            # 高考模式界面
@@ -99,7 +99,9 @@ pip install -r requirements.txt
 ├── requirements.txt     # 依赖包列表
 ├── settings.py          # 配置管理模块
 ├── ntp_sync.py          # 网络校时模块
-├── config/              # 配置文件夹
+├── 说明文档.md           # 项目说明文档（项目规划、进度记录）
+├── 开发规范.md           # 开发规范文档（代码规范、Git规范）
+├── config/              # 配置文件夹（运行时生成，不纳入版本控制）
 │   ├── settings.json    # 系统配置文件
 │   └── ntp_config.json  # NTP服务器配置文件
 └── Mp3/                 # 音频文件目录
@@ -115,6 +117,11 @@ pip install -r requirements.txt
     ├── p9.mp3
     └── p10.mp3
 ```
+
+## 项目文档
+
+- [说明文档.md](说明文档.md) - 项目规划、进度记录、问题跟踪
+- [开发规范.md](开发规范.md) - 代码规范、Git规范、开发流程
 
 ## 注意事项
 
